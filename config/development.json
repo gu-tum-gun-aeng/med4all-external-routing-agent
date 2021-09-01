@@ -1,0 +1,9 @@
+{
+  "app": {
+    "name": "med4all-external-routing-agent"
+  },
+  "env": "development",
+  "log": {
+    "level": "trace"
+  }
+}
