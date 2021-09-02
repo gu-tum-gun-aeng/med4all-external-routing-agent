@@ -1,20 +1,17 @@
 import axios from "axios"
 
-import config from "./config"
-import { TOPIC } from "./constants"
-import messageQueue from "./messageQueue"
-import { traceWrapperAsync } from "./util/tracer"
+import config from "../config"
+import { TOPIC } from "../constants"
+import messageQueue from "../util/messageQueue"
+import { traceWrapperAsync } from "../util/tracer"
 
-const {
-  waitingListApiUrl: WAITING_LIST_API_URL,
-  waitingListApiKey: WAITING_LIST_API_KEY,
-} = config
+const { colinkApiUrl: COLINK_API_URL, colinkApiKey: COLINK_API_KEY } = config
 
-const waitingListAgent = {
+const colinkProcessor = {
   consumePatientWithRiskScore: async () => {
     await messageQueue.consume(
       TOPIC.PATIENT_WITH_RISK_SCORE_MAIN,
-      waitingListAgent.processMessage
+      colinkProcessor.processMessage
     )
   },
   processMessage: async (message: string) => {
@@ -27,11 +24,11 @@ const waitingListAgent = {
 }
 
 async function sendToWaitingListApi(data: string): Promise<void> {
-  const headers = { "covid-wl-api-key": WAITING_LIST_API_KEY }
+  const headers = { "covid-wl-api-key": COLINK_API_KEY }
 
   await traceWrapperAsync(
     async () => {
-      await axios.post(WAITING_LIST_API_URL, data, { headers })
+      await axios.post(COLINK_API_URL, data, { headers })
     },
     "external",
     "sendToWaitingListApi",
@@ -43,4 +40,4 @@ async function sendToDeadLetterQueue(message: string): Promise<void> {
   await messageQueue.publish(TOPIC.PATIENT_WITH_RISK_SCORE_DLQ, message)
 }
 
-export default waitingListAgent
+export default colinkProcessor
