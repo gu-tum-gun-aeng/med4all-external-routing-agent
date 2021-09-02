@@ -1,11 +1,12 @@
 import Logger, * as bunyan from "bunyan"
-import config from "config"
+
+import config from "../config"
 
 console.log(process.env.NODE_ENV)
 
 export const logger: Logger = bunyan.createLogger({
-  level: config.get("log.level"),
-  name: config.get("app.name"),
+  level: config.logLevel,
+  name: config.appName,
   serializers: {
     http: bunyan.stdSerializers.req,
   },

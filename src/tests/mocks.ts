@@ -1,4 +1,4 @@
-import { Patient, WaitingListApiRequest } from "./models"
+import { Patient, WaitingListApiRequest } from "../model/models"
 
 export const mockPatientData: Patient = {
   id: 1,

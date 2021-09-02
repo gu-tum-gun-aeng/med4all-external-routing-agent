@@ -8,7 +8,7 @@ let kafka: Kafka
 let producer: Producer
 let consumer: Consumer
 
-const CLIENT_ID = `med4all-waiting-list-agent-${uuidv4()}`
+const CLIENT_ID = `${config.appName}-${uuidv4()}`
 const BROKER_LIST = config.kafkaBrokerList
 const GROUP_ID = config.kafkaGroupId
 const CONNECTION_TIMEOUT = config.kafkaConnectionTimeout

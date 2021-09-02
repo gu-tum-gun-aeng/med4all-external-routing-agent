@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "med4all-waiting-list-agent"
+    "name": "med4all-external-routing-agent"
   },
   "env": "test",
   "log": {

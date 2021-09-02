@@ -1,10 +1,11 @@
 import rTracer from "cls-rtracer"
-import config from "config"
+
+import config from "../config"
 
 import { logger } from "./logger"
 
 type Context = "route" | "external" | "log" | "test"
-const logAppName = config.get("app.name")
+const logAppName = config.appName
 
 /**
  * Tracer Wrapper function

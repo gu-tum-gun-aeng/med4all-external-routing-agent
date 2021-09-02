@@ -1,8 +1,8 @@
 import axios from "axios"
 import sinon from "sinon"
 
-import messageQueue from "./messageQueue"
-import waitingListAgent from "./waitingListAgent"
+import messageQueue from "../messageQueue"
+import waitingListAgent from "../waitingListAgent"
 
 afterEach(() => {
   sinon.restore()
