@@ -16,14 +16,14 @@ const colinkProcessor = {
   },
   processMessage: async (message: string) => {
     try {
-      await sendToWaitingListApi(message)
+      await sendToColinkApi(message)
     } catch (error) {
       await sendToDeadLetterQueue(message)
     }
   },
 }
 
-async function sendToWaitingListApi(data: string): Promise<void> {
+async function sendToColinkApi(data: string): Promise<void> {
   const headers = { "covid-wl-api-key": COLINK_API_KEY }
 
   await traceWrapperAsync(
@@ -31,7 +31,7 @@ async function sendToWaitingListApi(data: string): Promise<void> {
       await axios.post(COLINK_API_URL, data, { headers })
     },
     "external",
-    "sendToWaitingListApi",
+    "sendToColinkApi",
     true
   )
 }
