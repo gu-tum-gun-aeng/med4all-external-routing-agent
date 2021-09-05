@@ -1,6 +1,7 @@
 import axios from "axios"
 import sinon from "sinon"
 
+import { CertificateType, Patient } from "../model/patient/patient.model"
 import colinkProcessor from "../processor/colinkProcessor"
 import messageQueue from "../util/messageQueue"
 
@@ -13,7 +14,14 @@ test("colinkProcessor.processMessage should call axios.post once", async () => {
 
   axiosStub.returns(Promise.resolve({ result: "success" }))
 
-  await colinkProcessor.processMessage("blahblah")
+  const mockPatient: Patient = {
+    certificateId: "0123456789123",
+    certificateType: CertificateType.PersonalId,
+    name: "John",
+    surname: "Doe",
+  }
+
+  await colinkProcessor.processMessage(JSON.stringify(mockPatient))
 
   expect(axiosStub.callCount).toBe(1)
 })
