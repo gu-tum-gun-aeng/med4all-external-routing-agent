@@ -2,7 +2,7 @@ import axios from "axios"
 
 import config from "../config"
 import { TOPIC } from "../constants"
-import { ColinkRequest } from "../model/colink/colink.request.model"
+import { sendToColinkRequest } from "../model/colink/colink.request.model"
 import { colinkRequestFromPatient } from "../model/colink/mapper/colink.request.mapper"
 import { Patient } from "../model/patient/patient.model"
 import messageQueue from "../util/messageQueue"
@@ -21,14 +21,18 @@ const colinkProcessor = {
     try {
       const patientData: Patient = JSON.parse(message)
       const colinkRequest = colinkRequestFromPatient(patientData)
-      await sendToColinkApi(colinkRequest)
+      const colinkInsertRequest: sendToColinkRequest = {
+        record_count: 1,
+        record_data: [colinkRequest]
+      }
+      await sendToColinkInsertApi(colinkInsertRequest)
     } catch (error) {
       await sendToDeadLetterQueue(message)
     }
   },
 }
 
-async function sendToColinkApi(request: ColinkRequest): Promise<void> {
+async function sendToColinkInsertApi(request: sendToColinkRequest): Promise<void> {
   const headers = { Authorization: `Bearer ${COLINK_API_KEY}` }
 
   await traceWrapperAsync(
@@ -36,7 +40,7 @@ async function sendToColinkApi(request: ColinkRequest): Promise<void> {
       await axios.post(COLINK_API_URL, request, { headers })
     },
     "external",
-    "sendToColinkApi",
+    "sendToColinkInsertApi",
     true
   )
 }

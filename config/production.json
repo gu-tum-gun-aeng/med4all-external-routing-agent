@@ -10,5 +10,7 @@
     "token": "",
     "url": ""
   },
-  "kafka": ""
+  "kafka": {
+    "brokers": ""
+  }
 }

@@ -67,3 +67,8 @@ export type ColinkRequest = {
   favipiravir_by?: string
   treatment_right?: string
 }
+
+export type sendToColinkRequest = {
+  record_count: number,
+  record_data: ColinkRequest[],
+}
