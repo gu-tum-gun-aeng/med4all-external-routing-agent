@@ -69,6 +69,6 @@ export type ColinkRequest = {
 }
 
 export type sendToColinkRequest = {
-  record_count: number,
-  record_data: ColinkRequest[],
+  record_count: number
+  record_data: ColinkRequest[]
 }

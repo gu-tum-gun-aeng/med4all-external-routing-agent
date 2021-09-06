@@ -23,7 +23,7 @@ const colinkProcessor = {
       const colinkRequest = colinkRequestFromPatient(patientData)
       const colinkInsertRequest: sendToColinkRequest = {
         record_count: 1,
-        record_data: [colinkRequest]
+        record_data: [colinkRequest],
       }
       await sendToColinkInsertApi(colinkInsertRequest)
     } catch (error) {
@@ -32,7 +32,9 @@ const colinkProcessor = {
   },
 }
 
-async function sendToColinkInsertApi(request: sendToColinkRequest): Promise<void> {
+async function sendToColinkInsertApi(
+  request: sendToColinkRequest
+): Promise<void> {
   const headers = { Authorization: `Bearer ${COLINK_API_KEY}` }
 
   await traceWrapperAsync(
