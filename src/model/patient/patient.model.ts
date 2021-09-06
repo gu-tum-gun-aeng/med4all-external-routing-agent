@@ -1,3 +1,29 @@
+export type Patient = {
+  certificateId: string
+  certificateType: CertificateType
+  name: string
+  surname: string
+  gender?: number
+  ageYear?: number
+  patientPhone?: string
+  custodianPhone?: string
+  weightKg?: number
+  heightCm?: number
+  medicalInfo?: MedicalInfo
+  checkInWhen?: string
+  checkOutWhen?: string
+  address?: Address
+  patientDataSource?: number
+  admittedTo?: string
+  healthCoverage?: number
+  lineId?: string
+  homeTown?: number
+  equipments?: string[]
+  nhso_ticket_id?: string
+  trustedSource?: string
+  riskScore?: RiskScore
+}
+
 export enum CertificateType {
   PersonalId = 0,
   Passport = 1,
@@ -12,7 +38,7 @@ export type MedicalInfo = {
   labTestWhen?: string
   isFavipiravirReceived?: boolean
   receivedFavipiravirWhen?: string
-  bodyTemperatureCelcius?: number
+  bodyTemperatureCelsius?: number
   pulseRateBpm?: number
   oxygenSaturation?: number
   oxygenSaturationAfterExercise?: number
@@ -40,7 +66,7 @@ export type MedicalInfo = {
   isSymptomLossOfTaste?: boolean
   isSymptomTiredness?: boolean
   isSymptomChestPain?: boolean
-  isDiseaseUncontrollDm?: boolean
+  isDiseaseUncontrolledDm?: boolean
   isDiseaseCancer?: boolean
   isDiseaseCopd?: boolean
   isDiseaseAsthma?: boolean
@@ -54,10 +80,16 @@ export type MedicalInfo = {
   isDiseaseCirrhosis?: boolean
   isDiseaseTuberculosis?: boolean
   vaccinationRecords?: string[]
-  firstVaccinedDate?: string
-  secondVaccinedDate?: string
+  firstVaccinatedWhen?: string
+  secondVaccinatedWhen?: string
   remark?: string
-  firstDateOfSymtom?: string
+  firstSymptomWhen?: string
+  isMedicineRequested?: boolean
+  isBypassScreening?: boolean
+  isSymptomSevereCough?: boolean
+  isSymptomPoorAppetite?: boolean
+  isSymptomFatique?: boolean
+  isDiseaseESRD?: boolean
 }
 
 export type Address = {
@@ -75,35 +107,14 @@ export type Address = {
   note?: string
 }
 
-export type RiskScore = {
-  inclusion_label: string
-  inclusion_label_type: string
-  triage_score: number
+export enum GenderCode {
+  male = 1,
+  female = 2,
+  notApplicable = 9,
 }
 
-export type Patient = {
-  certificateId: string
-  certificateType: CertificateType
-  name: string
-  surname: string
-  gender?: number
-  ageYear?: number
-  patientPhone?: string
-  custodianPhone?: string
-  weightKg?: number
-  heightCm?: number
-  medicalInfo?: MedicalInfo
-  checkInDate?: Date
-  checkOutDate?: Date
-  address?: Address
-  patientDataSource?: number
-  sourceLocation?: string
-  admittedTo?: string
-  healthCoverage?: number
-  lineId?: string
-  homeTown?: number
-  equipments?: string[]
-  certificatePictureUrl?: string
-  covidTestPictureUrl?: string
-  riskScore?: RiskScore
+export type RiskScore = {
+  inclusionLabel: string
+  inclusionLabelType: string
+  triageScore: number
 }
