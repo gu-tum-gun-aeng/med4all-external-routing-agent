@@ -5,5 +5,10 @@
   "env": "development",
   "log": {
     "level": "trace"
-  }
+  },
+  "colink": {
+    "token": "",
+    "url": ""
+  },
+  "kafka": ""
 }

@@ -12,4 +12,5 @@ const run = async () => {
   await colinkProcessor.consumePatientWithRiskScore()
   logger.info("Terminating Application")
 }
+
 run().catch(logger.error)
