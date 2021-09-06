@@ -1,8 +1,8 @@
-name: Node-on-push-main
+name: Node-on-push-master
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   test:
