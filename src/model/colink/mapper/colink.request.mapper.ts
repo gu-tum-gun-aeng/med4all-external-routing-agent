@@ -26,7 +26,7 @@ export function colinkRequestFromPatient(patient: Patient): ColinkRequest {
       ? patient.medicalInfo?.labTestWhen
       : undefined,
     bed_waiting_days: undefined,
-    cd_1: patient.medicalInfo?.isDiseaseUncontrollDm ?? false, // ??? Cannot map
+    cd_1: patient.medicalInfo?.isDiseaseUncontrolledDm ?? false, // ??? Cannot map
     cd_2: patient.medicalInfo?.isDiseaseCancer ?? false,
     cd_3: patient.medicalInfo?.isDiseaseCopd ?? false,
     cd_4: patient.medicalInfo?.isDiseaseAsthma ?? false,
@@ -75,7 +75,7 @@ export function colinkRequestFromPatient(patient: Patient): ColinkRequest {
     test_type: undefined,
     hospital_admitted_other: undefined,
     favipiravir_receive_date: patient.medicalInfo?.receivedFavipiravirWhen,
-    risk_score: patient.riskScore?.triage_score,
+    risk_score: patient.riskScore?.triageScore,
     daily_activity: undefined,
     pregnancy_week: patient.medicalInfo?.pregnancyWeeks,
     favipiravir_by: undefined,
