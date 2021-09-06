@@ -5,5 +5,12 @@
   "env": "test",
   "log": {
     "level": "debug"
+  },
+  "colink": {
+    "token": "",
+    "url": ""
+  },
+  "kafka": {
+    "brokers": ""
   }
 }

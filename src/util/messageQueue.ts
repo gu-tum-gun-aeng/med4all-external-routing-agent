@@ -1,8 +1,9 @@
 import { Consumer, Kafka, Producer } from "kafkajs"
 import { v4 as uuidv4 } from "uuid"
 
-import config from "./config"
-import { traceWrapperAsync } from "./util/tracer"
+import config from "../config"
+
+import { traceWrapperAsync } from "./tracer"
 
 let kafka: Kafka
 let producer: Producer
