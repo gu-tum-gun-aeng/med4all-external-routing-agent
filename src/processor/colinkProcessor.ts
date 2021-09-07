@@ -10,6 +10,10 @@ import { traceWrapperAsync } from "../util/tracer"
 
 const { colinkApiUrl: COLINK_API_URL, colinkApiKey: COLINK_API_KEY } = config
 
+axios.defaults.validateStatus = (status) => {
+  return status == 200;
+};
+
 const colinkProcessor = {
   consumePatientWithRiskScore: async () => {
     await messageQueue.consume(
@@ -39,7 +43,14 @@ async function sendToColinkInsertApi(
 
   await traceWrapperAsync(
     async () => {
-      await axios.post(COLINK_API_URL, request, { headers })
+      await axios.post(COLINK_API_URL, request, { headers }).then(res => {
+        if (res.status === 200) {
+          return res.data
+        }
+        else {
+          return 
+        }
+      })
     },
     "external",
     "sendToColinkInsertApi",
