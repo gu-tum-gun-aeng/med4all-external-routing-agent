@@ -45,7 +45,13 @@ async function sendToColinkInsertApi(
     async () => {
       await axios.post(COLINK_API_URL, request, { headers }).then((res) => {
         console.log(res.status)
-        return res
+        if (res.status == 200) {
+          return Promise.resolve("success")
+        } else {
+          return Promise.reject(
+            new Error("error: " + res.data + " status is " + res.status)
+          )
+        }
       })
     },
     "external",
