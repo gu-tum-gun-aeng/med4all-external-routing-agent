@@ -43,14 +43,7 @@ async function sendToColinkInsertApi(
 
   await traceWrapperAsync(
     async () => {
-      await axios.post(COLINK_API_URL, request, { headers }).then(res => {
-        if (res.status === 200) {
-          return res.data
-        }
-        else {
-          return 
-        }
-      })
+      await axios.post(COLINK_API_URL, request, { headers })
     },
     "external",
     "sendToColinkInsertApi",
