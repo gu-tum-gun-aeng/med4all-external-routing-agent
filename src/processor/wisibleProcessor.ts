@@ -13,10 +13,19 @@ const { wisibleApiUrl: WISIBLE_API_URL, wisibleApiKey: WISIBLE_API_KEY } =
 
 export default class WisibleProcessor extends SendToExternalProcessor {
   async sendToExternal(patient: Patient): Promise<void> {
+    if (!shouldSendToWisibleApi(patient)) {
+      return
+    }
+
     const wisibleRequest = wisibleRequestFromPatient(patient)
 
     sendToWisibleApi(wisibleRequest)
   }
+}
+
+// TODO: Implement this properly, for example, if wisible is not valid then return false
+function shouldSendToWisibleApi(patient: Patient): boolean {
+  return true
 }
 
 async function sendToWisibleApi(request: SendToWisibleRequest): Promise<void> {
