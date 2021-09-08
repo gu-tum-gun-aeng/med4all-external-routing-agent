@@ -2,8 +2,7 @@ import axios, { AxiosResponse } from "axios"
 import sinon from "sinon"
 
 import { CertificateType, Patient } from "../model/patient/patient.model"
-import colinkProcessor from "../processor/colinkProcessor"
-import messageQueue from "../util/messageQueue"
+import ColinkProcessor from "../processor/colinkProcessor"
 
 afterEach(() => {
   sinon.restore()
@@ -12,7 +11,7 @@ afterEach(() => {
 test("colinkProcessor.processMessage should call axios.post once", async () => {
   const axiosStub = sinon.stub(axios, "post")
 
-  const res: AxiosResponse<any> = {
+  const res: AxiosResponse = {
     status: 200,
     data: "success",
     headers: {},
@@ -29,19 +28,34 @@ test("colinkProcessor.processMessage should call axios.post once", async () => {
     surname: "Doe",
   }
 
-  await colinkProcessor.processMessage(JSON.stringify(mockPatient))
+  await new ColinkProcessor().processMessage(JSON.stringify(mockPatient))
 
   expect(axiosStub.callCount).toBe(1)
 })
 
-test("colinkProcessor.processMessage should call messageQueue.publish once if axios.post return in failure", async () => {
-  const axiosStub = sinon.stub(axios, "post")
-  const messageQueueStub = sinon.stub(messageQueue, "publish")
+// TODO: handle case colink error 400, as below
 
-  axiosStub.throws(new Error("Server not found"))
-  messageQueueStub.returns(Promise.resolve())
+// test("colinkProcessor.processMessage when axios.post return 400 should throw error", async () => {
+//   const axiosStub = sinon.stub(axios, "post")
 
-  await colinkProcessor.processMessage("blahblah")
+//   const res: AxiosResponse = {
+//     status: 400,
+//     data: "failed",
+//     headers: {},
+//     statusText: "failed",
+//     config: axios.defaults,
+//   }
 
-  expect(messageQueueStub.callCount).toBe(1)
-})
+//   axiosStub.returns(Promise.resolve(res))
+
+//   const mockPatient: Patient = {
+//     certificateId: "0123456789123",
+//     certificateType: CertificateType.PersonalId,
+//     name: "John",
+//     surname: "Doe",
+//   }
+
+//   expect(
+//     new ColinkProcessor().processMessage(JSON.stringify(mockPatient))
+//   ).rejects.toThrow("error")
+// })

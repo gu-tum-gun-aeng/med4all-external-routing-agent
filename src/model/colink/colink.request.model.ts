@@ -68,7 +68,7 @@ export type ColinkRequest = {
   treatment_right?: string
 }
 
-export type sendToColinkRequest = {
+export type SendToColinkRequest = {
   record_count: number
   record_data: ColinkRequest[]
 }

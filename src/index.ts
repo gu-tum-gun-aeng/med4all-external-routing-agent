@@ -1,15 +1,26 @@
+import axios from "axios"
 import Dotenv from "dotenv"
+
 Dotenv.config()
 
-import colinkProcessor from "./processor/colinkProcessor"
+import ColinkProcessor from "./processor/colinkProcessor"
+import { ParallelProcessConsumer, Processor } from "./processor/processor"
 import { logger } from "./util/logger"
 import messageQueue from "./util/messageQueue"
+
+axios.defaults.validateStatus = (status) => {
+  return status === 200
+}
 
 logger.info("Start Application")
 
 const run = async () => {
   await messageQueue.initialize()
-  await colinkProcessor.consumePatientWithRiskScore()
+
+  const processors: Processor[] = [new ColinkProcessor()]
+
+  await new ParallelProcessConsumer(processors).consume()
+
   logger.info("Terminating Application")
 }
 
