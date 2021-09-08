@@ -10,6 +10,10 @@
     "token": "",
     "url": ""
   },
+  "wisible": {
+    "token": "",
+    "url": ""
+  },
   "kafka": {
     "brokers": ""
   }

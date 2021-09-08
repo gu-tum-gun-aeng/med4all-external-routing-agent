@@ -5,6 +5,7 @@ Dotenv.config()
 
 import ColinkProcessor from "./processor/colinkProcessor"
 import { ParallelProcessConsumer, Processor } from "./processor/processor"
+import WisibleProcessor from "./processor/wisibleProcessor"
 import { logger } from "./util/logger"
 import messageQueue from "./util/messageQueue"
 
@@ -17,7 +18,10 @@ logger.info("Start Application")
 const run = async () => {
   await messageQueue.initialize()
 
-  const processors: Processor[] = [new ColinkProcessor()]
+  const processors: Processor[] = [
+    new ColinkProcessor(),
+    new WisibleProcessor(),
+  ]
 
   await new ParallelProcessConsumer(processors).consume()
 
