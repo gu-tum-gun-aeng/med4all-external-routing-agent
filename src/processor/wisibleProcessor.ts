@@ -24,7 +24,7 @@ export default class WisibleProcessor extends SendToExternalProcessor {
 }
 
 // TODO: Implement this properly, for example, if wisible is not valid then return false
-function shouldSendToWisibleApi(patient: Patient): boolean {
+function shouldSendToWisibleApi(_patient: Patient): boolean {
   return true
 }
 
