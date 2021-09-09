@@ -27,7 +27,7 @@ test("wisibleProcessor.processMessage should call axios.post once", async () => 
     name: "John",
     surname: "Doe",
     weightKg: 60,
-    ageYear: 20,
+    ageYear: 14,
     patientPhone: "0812223333",
     address: {
       subDistrictCode: 1,

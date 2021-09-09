@@ -20,6 +20,14 @@ export function optGet<T>(tOptional: Optional<T>): T {
   }
 }
 
+export function getOrElse<T>(tOptional: Optional<T>, defaultValue: T): T {
+  if (optIsDefined(tOptional)) {
+    return tOptional
+  } else {
+    return defaultValue
+  }
+}
+
 export function optGetOrElse<U, T extends U>(
   tOptional: Optional<T>,
   tElse: U

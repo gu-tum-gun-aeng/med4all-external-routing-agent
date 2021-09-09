@@ -1,4 +1,9 @@
-import { optGet, optGetOrElse, optIsDefined } from "../../../util/optional"
+import {
+  getOrElse,
+  optGet,
+  optGetOrElse,
+  optIsDefined,
+} from "../../../util/optional"
 import { Patient } from "../../patient/patient.model"
 import { SendToWisibleRequest } from "../wisible.request.model"
 
@@ -26,16 +31,24 @@ export function wisibleRequestFromPatient(
   }
 }
 
-type Pipeline =
+export type Pipeline =
   | "ยาแพคเล็ก (นน<90)"
   | "ยาแพคใหญ่ (นน>90 OR BMI>30)"
   | "ยาคนท้อง โรคตับ เบาหวาน"
   | "ยาเด็ก"
 
-// TODO: Implement this properly
-function pipeline(_patient: Patient): Pipeline {
-  if (optGet(_patient.ageYear) < 15) {
+export function pipeline(patient: Patient): Pipeline {
+  if (optGet(patient.ageYear) < 15) {
     return "ยาเด็ก"
+  } else if (
+    getOrElse(patient.medicalInfo?.isPregnant, false) ||
+    getOrElse(patient.medicalInfo?.isDiseaseUncontrolledDm, false) ||
+    getOrElse(patient.medicalInfo?.isDiseaseCirrhosis, false)
+  ) {
+    return "ยาคนท้อง โรคตับ เบาหวาน"
+  } else if (optGet(patient.weightKg) > 90) {
+    // NO BMI calculated because Siriraj not provide Height
+    return "ยาแพคใหญ่ (นน>90 OR BMI>30)"
   } else {
     return "ยาแพคเล็ก (นน<90)"
   }
