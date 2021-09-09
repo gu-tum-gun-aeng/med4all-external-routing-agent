@@ -20,19 +20,22 @@ export function optGet<T>(tOptional: Optional<T>): T {
   }
 }
 
-export function getOrElse<T>(tOptional: Optional<T>, defaultValue: T): T {
-  if (optIsDefined(tOptional)) {
-    return tOptional
-  } else {
-    return defaultValue
-  }
+function identity<T>(a: T): T {
+  return a
 }
+
+function maybe<T, U>(fn: (t: T) => U): (a: Optional<T>, b: U) => U {
+  return (tOptional, defaultValue) =>
+    optIsDefined(tOptional) ? fn(optGet(tOptional)) : defaultValue
+}
+
+export const getOrElse = maybe(identity)
 
 export function optGetOrElse<U, T extends U>(
   tOptional: Optional<T>,
   tElse: U
 ): U {
-  return optIsDefined(tOptional) ? tOptional : tElse
+  return optIsDefined(tOptional) ? optGet(tOptional) : tElse
 }
 
 export function optOrElse<U, T extends U>(
