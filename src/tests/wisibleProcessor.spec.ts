@@ -2,13 +2,13 @@ import axios, { AxiosResponse } from "axios"
 import sinon from "sinon"
 
 import { CertificateType, Patient } from "../model/patient/patient.model"
-import ColinkProcessor from "../processor/colinkProcessor"
+import WisibleProcessor from "../processor/wisibleProcessor"
 
 afterEach(() => {
   sinon.restore()
 })
 
-test("colinkProcessor.processMessage should call axios.post once", async () => {
+test("wisibleProcessor.processMessage should call axios.post once", async () => {
   const axiosStub = sinon.stub(axios, "post")
 
   const res: AxiosResponse = {
@@ -26,16 +26,25 @@ test("colinkProcessor.processMessage should call axios.post once", async () => {
     certificateType: CertificateType.PersonalId,
     name: "John",
     surname: "Doe",
+    weightKg: 60,
+    ageYear: 14,
+    patientPhone: "0812223333",
+    address: {
+      subDistrictCode: 1,
+      districtCode: 2,
+      provinceCode: 3,
+      zipCode: 4,
+    },
   }
 
-  await new ColinkProcessor().processMessage(JSON.stringify(mockPatient))
+  await new WisibleProcessor().processMessage(JSON.stringify(mockPatient))
 
   expect(axiosStub.callCount).toBe(1)
 })
 
-// TODO: handle case colink error 400, as below
+// TODO: handle case wisible error 400, as below
 
-// test("colinkProcessor.processMessage when axios.post return 400 should throw error", async () => {
+// test("wisibleProcessor.processMessage when axios.post return 400 should throw error", async () => {
 //   const axiosStub = sinon.stub(axios, "post")
 
 //   const res: AxiosResponse = {
@@ -56,6 +65,6 @@ test("colinkProcessor.processMessage should call axios.post once", async () => {
 //   }
 
 //   expect(
-//     new ColinkProcessor().processMessage(JSON.stringify(mockPatient))
+//     new WisibleProcessor().processMessage(JSON.stringify(mockPatient))
 //   ).rejects.toThrow("error")
 // })

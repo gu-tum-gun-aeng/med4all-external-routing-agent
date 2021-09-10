@@ -9,6 +9,8 @@ const config: {
   kafkaConnectionTimeout: number
   colinkApiUrl: string
   colinkApiKey: string
+  wisibleApiUrl: string
+  wisibleApiKey: string
 } = {
   appName: jsonConfig.get("app.name"),
   logLevel: jsonConfig.get("log.level"),
@@ -19,6 +21,8 @@ const config: {
   kafkaConnectionTimeout: Number(process.env.KAFKA_CONNECTION_TIMEOUT) || 1000,
   colinkApiUrl: process.env.COLINK_API_URL || jsonConfig.get("colink.url"),
   colinkApiKey: process.env.COLINK_API_KEY || jsonConfig.get("colink.token"),
+  wisibleApiUrl: process.env.WISIBLE_API_URL || jsonConfig.get("wisible.url"),
+  wisibleApiKey: process.env.WISIBLE_API_KEY || jsonConfig.get("wisible.token"),
 }
 
 export default config
