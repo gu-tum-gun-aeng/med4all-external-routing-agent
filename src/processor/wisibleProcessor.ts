@@ -42,6 +42,7 @@ async function sendToWisibleApi(request: SendToWisibleRequest): Promise<void> {
   await traceWrapperAsync(
     async () => {
       await axios.post(WISIBLE_API_URL, request, { headers }).then((res) => {
+        console.log(res.data)
         const response: WisibleAddPatientResponse = JSON.parse(res.data)
         if (response.ref !== undefined) {
           return Promise.resolve("success")
