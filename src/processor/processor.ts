@@ -16,7 +16,7 @@ export class ParallelProcessConsumer {
     )
   }
 
-  async parallelProcessMessage(message: string) {
+  parallelProcessMessage = async (message: string) => {
     try {
       await Promise.all(
         this.processors.map(async (processor) =>
