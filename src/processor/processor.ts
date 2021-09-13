@@ -36,9 +36,7 @@ export abstract class Processor {
 
 export abstract class SendToExternalProcessor extends Processor {
   async processMessage(message: string) {
-    console.log(JSON.parse(message))
     const patientData: Patient = JSON.parse(message)
-    console.log(patientData)
 
     await this.sendToExternal(patientData)
   }
