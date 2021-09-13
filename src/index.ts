@@ -26,7 +26,7 @@ const run = async () => {
     new WisibleProcessor(),
   ]
 
-  await new ParallelProcessConsumer().consume(processors)
+  await new ParallelProcessConsumer(processors).consume()
 
   logger.info("Terminating Application")
 }

@@ -3,19 +3,25 @@ import { Patient } from "../model/patient/patient.model"
 import messageQueue from "../util/messageQueue"
 
 export class ParallelProcessConsumer {
-  async consume(process: SendToExternalProcessor[]) {
-    await messageQueue.consume(TOPIC.PATIENT_WITH_RISK_SCORE_MAIN, (message) =>
-      this.parallelProcessMessage(message, process)
+  processors: SendToExternalProcessor[]
+
+  constructor(processors: SendToExternalProcessor[]) {
+    this.processors = processors
+  }
+
+  async consume() {
+    await messageQueue.consume(
+      TOPIC.PATIENT_WITH_RISK_SCORE_MAIN,
+      this.parallelProcessMessage
     )
   }
 
-  async parallelProcessMessage(
-    message: string,
-    process: SendToExternalProcessor[]
-  ) {
+  async parallelProcessMessage(message: string) {
     try {
       await Promise.all(
-        process.map(async (processor) => processor.processMessage(message))
+        this.processors.map(async (processor) =>
+          processor.processMessage(message)
+        )
       )
     } catch (error) {
       console.log(error)
@@ -30,7 +36,9 @@ export abstract class Processor {
 
 export abstract class SendToExternalProcessor extends Processor {
   async processMessage(message: string) {
+    console.log(JSON.parse(message))
     const patientData: Patient = JSON.parse(message)
+    console.log(patientData)
 
     await this.sendToExternal(patientData)
   }
