@@ -42,11 +42,14 @@ async function sendToWisibleApi(request: SendToWisibleRequest): Promise<void> {
     async () => {
       await axios.post(WISIBLE_API_URL, request, { headers }).then((res) => {
         console.log(JSON.stringify(res.data))
+
         if (JSON.stringify(res.data).indexOf("done") !== -1) {
           return Promise.resolve("success")
         } else {
           return Promise.reject(
-            new Error("error: " + res.data + " status is " + res.status)
+            new Error(
+              "error: " + JSON.stringify(res.data) + " status is " + res.status
+            )
           )
         }
       })
