@@ -12,7 +12,8 @@
   },
   "wisible": {
     "token": "",
-    "url": ""
+    "url": "",
+    "cookie": ""
   },
   "kafka": {
     "brokers": ""

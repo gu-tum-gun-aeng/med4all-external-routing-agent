@@ -8,7 +8,7 @@ import { traceWrapperAsync } from "../util/tracer"
 
 import { SendToExternalProcessor } from "./processor"
 
-const { wisibleApiUrl: WISIBLE_API_URL, wisibleApiKey: WISIBLE_API_KEY } =
+const { wisibleApiUrl: WISIBLE_API_URL, wisibleApiKey: WISIBLE_API_KEY, wisibleCookie: WISIBLE_COOKIE } =
   config
 
 export default class WisibleProcessor extends SendToExternalProcessor {
@@ -29,7 +29,11 @@ function shouldSendToWisibleApi(_patient: Patient): boolean {
 }
 
 async function sendToWisibleApi(request: SendToWisibleRequest): Promise<void> {
-  const headers = { Authorization: `Bearer ${WISIBLE_API_KEY}` }
+  const headers = { 
+    "x-api-key": WISIBLE_API_KEY,
+    "Content-Type": "application/json",
+    "Cookie": WISIBLE_COOKIE
+   }
 
   await traceWrapperAsync(
     async () => {

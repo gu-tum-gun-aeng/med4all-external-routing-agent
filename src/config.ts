@@ -11,6 +11,7 @@ const config: {
   colinkApiKey: string
   wisibleApiUrl: string
   wisibleApiKey: string
+  wisibleCookie: string
 } = {
   appName: jsonConfig.get("app.name"),
   logLevel: jsonConfig.get("log.level"),
@@ -23,6 +24,7 @@ const config: {
   colinkApiKey: process.env.COLINK_API_KEY || jsonConfig.get("colink.token"),
   wisibleApiUrl: process.env.WISIBLE_API_URL || jsonConfig.get("wisible.url"),
   wisibleApiKey: process.env.WISIBLE_API_KEY || jsonConfig.get("wisible.token"),
+  wisibleCookie: process.env.WISIBLE_COOKIE || jsonConfig.get("wisible.cookie"),
 }
 
 export default config
