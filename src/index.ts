@@ -4,10 +4,7 @@ import Dotenv from "dotenv"
 Dotenv.config()
 
 import ColinkProcessor from "./processor/colinkProcessor"
-import {
-  ParallelProcessConsumer,
-  SendToExternalProcessor,
-} from "./processor/processor"
+import { ParallelProcessConsumer } from "./processor/processor"
 import WisibleProcessor from "./processor/wisibleProcessor"
 import { logger } from "./util/logger"
 import messageQueue from "./util/messageQueue"
@@ -21,12 +18,12 @@ logger.info("Start Application")
 const run = async () => {
   await messageQueue.initialize()
 
-  const processors: SendToExternalProcessor[] = [
-    new ColinkProcessor(),
-    new WisibleProcessor(),
-  ]
+  const colink = new ColinkProcessor()
+  const wisible = new WisibleProcessor()
 
-  await new ParallelProcessConsumer(processors).consume()
+  const processes = new ParallelProcessConsumer([colink, wisible])
+
+  await processes.consume()
 
   logger.info("Terminating Application")
 }
