@@ -4,6 +4,7 @@ import config from "../config"
 import { Patient } from "../model/patient/patient.model"
 import { wisibleRequestFromPatient } from "../model/wisible/mapper/wisible.request.mapper"
 import { SendToWisibleRequest } from "../model/wisible/wisible.request.model"
+import { WisibleAddPatientResponse } from "../model/wisible/wisible.response.model"
 import { traceWrapperAsync } from "../util/tracer"
 
 import { SendToExternalProcessor } from "./processor"
@@ -41,7 +42,8 @@ async function sendToWisibleApi(request: SendToWisibleRequest): Promise<void> {
   await traceWrapperAsync(
     async () => {
       await axios.post(WISIBLE_API_URL, request, { headers }).then((res) => {
-        if (res.status === 200) {
+        const response: WisibleAddPatientResponse = JSON.parse(res.data)
+        if (response.ref !== undefined) {
           return Promise.resolve("success")
         } else {
           return Promise.reject(
