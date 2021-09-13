@@ -9,8 +9,9 @@ import {
 import messageQueue from "../util/messageQueue"
 
 test("ParallelProcessConsumer.parallelProcessMessage when have no processors should do nothing", async () => {
-  await new ParallelProcessConsumer([]).parallelProcessMessage(
-    "This message won't even be read."
+  await new ParallelProcessConsumer().parallelProcessMessage(
+    "This message won't even be read.",
+    []
   )
 })
 
@@ -20,8 +21,9 @@ test("ParallelProcessConsumer.parallelProcessMessage when there are N processors
 
   const processors = Array(n).fill(new CounterProcessor())
 
-  await new ParallelProcessConsumer(processors).parallelProcessMessage(
-    "This message won't even be read."
+  await new ParallelProcessConsumer().parallelProcessMessage(
+    "This message won't even be read.",
+    processors
   )
 
   expect(counter).toBe(n)
@@ -36,8 +38,9 @@ test("ParallelProcessConsumer.parallelProcessMessage when any processor throw er
   const messageQueueStub = sinon.stub(messageQueue, "publish")
   messageQueueStub.returns(Promise.resolve())
 
-  await new ParallelProcessConsumer(processors).parallelProcessMessage(
-    "This message won't even be read."
+  await new ParallelProcessConsumer().parallelProcessMessage(
+    "This message won't even be read.",
+    processors
   )
 
   expect(messageQueueStub.callCount).toBe(1)

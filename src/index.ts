@@ -25,7 +25,7 @@ const run = async () => {
 
   console.log(processors)
 
-  await new ParallelProcessConsumer(processors).consume()
+  await new ParallelProcessConsumer().consume(processors)
 
   logger.info("Terminating Application")
 }
