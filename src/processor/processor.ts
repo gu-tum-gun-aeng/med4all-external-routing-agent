@@ -3,13 +3,16 @@ import { Patient } from "../model/patient/patient.model"
 import messageQueue from "../util/messageQueue"
 
 export class ParallelProcessConsumer {
-  async consume(process: Processor[]) {
+  async consume(process: SendToExternalProcessor[]) {
     await messageQueue.consume(TOPIC.PATIENT_WITH_RISK_SCORE_MAIN, (message) =>
       this.parallelProcessMessage(message, process)
     )
   }
 
-  async parallelProcessMessage(message: string, process: Processor[]) {
+  async parallelProcessMessage(
+    message: string,
+    process: SendToExternalProcessor[]
+  ) {
     try {
       await Promise.all(
         process.map(async (processor) => processor.processMessage(message))
