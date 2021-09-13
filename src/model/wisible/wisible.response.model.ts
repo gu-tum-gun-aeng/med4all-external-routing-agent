@@ -1,4 +1,4 @@
 export type WisibleAddPatientResponse = {
-    result: string,
-    ref?: number
+  result: string
+  ref?: number
 }

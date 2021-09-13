@@ -13,7 +13,10 @@ test("wisibleProcessor.processMessage should call axios.post once", async () => 
 
   const res: AxiosResponse = {
     status: 200,
-    data: "success",
+    data: JSON.stringify({
+      result: "",
+      ref: 0,
+    }),
     headers: {},
     statusText: "success",
     config: axios.defaults,
