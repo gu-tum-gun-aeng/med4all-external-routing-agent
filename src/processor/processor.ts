@@ -17,15 +17,14 @@ export class ParallelProcessConsumer {
   }
 
   async parallelProcessMessage(message: string) {
-    console.log(message)
     try {
       await Promise.all(
-        this.processors.map(async (processor) => {
-          console.log(message)
-          return processor.processMessage(message)
-        })
+        this.processors.map(async (processor) =>
+          processor.processMessage(message)
+        )
       )
     } catch (error) {
+      console.log(error)
       await messageQueue.publish(TOPIC.PATIENT_WITH_RISK_SCORE_DLQ, message)
     }
   }
