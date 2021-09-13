@@ -46,11 +46,7 @@ async function sendToWisibleApi(request: SendToWisibleRequest): Promise<void> {
         if (JSON.stringify(res.data).indexOf("done") !== -1) {
           return Promise.resolve("success")
         } else {
-          return Promise.reject(
-            new Error(
-              "error: " + JSON.stringify(res.data) + " status is " + res.status
-            )
-          )
+          return Promise.resolve("error: " + JSON.stringify(res.data) + " status is " + res.status)
         }
       })
     },
