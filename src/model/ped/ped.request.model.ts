@@ -73,15 +73,16 @@ export type PedRequest = {
   checkInWhen?: string
   checkOutWhen?: string
 
-  addressProvinceCode?: number
-  addressDistrictCode?: number
-  addressSubDistrictCode?: number
+  addressDetail?: string
+  addressProvince?: string
+  addressDistrict?: string
+  addressSubDistrict?: string
   addressMoo?: string
   addressRoad?: string
   addressAlley?: string
   addressSoi?: string
   addressVillage?: string
-  addressBangkokZoneCode?: number
+  addressBangkokZone?: string
   addressZipCode?: number
   addressBuilding?: string
   addressNote?: string

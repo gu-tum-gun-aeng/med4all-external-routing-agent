@@ -33,9 +33,9 @@ test("wisibleProcessor.processMessage should call axios.post once", async () => 
     ageYear: 14,
     patientPhone: "0812223333",
     address: {
-      subDistrictCode: 1,
-      districtCode: 2,
-      provinceCode: 3,
+      subDistrict: "someSubDistrict",
+      district: "someSubDistrict",
+      province: "someSubDistrict",
       zipCode: 4,
     },
   }

@@ -21,6 +21,7 @@ export type Patient = {
   equipments?: string[]
   nhso_ticket_id?: string
   trustedSource?: string
+  sourceName?: string
   riskScore?: RiskScore
 }
 
@@ -94,15 +95,16 @@ export type MedicalInfo = {
 }
 
 export type Address = {
-  provinceCode?: number
-  districtCode?: number
-  subDistrictCode?: number
+  addressDetail?: string
+  province?: string
+  district?: string
+  subDistrict?: string
   moo?: string
   road?: string
   alley?: string
   soi?: string
   village?: string
-  bangkokZoneCode?: number
+  bangkokZone?: string
   zipCode?: number
   building?: string
   note?: string

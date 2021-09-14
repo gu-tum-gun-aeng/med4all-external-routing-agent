@@ -23,9 +23,9 @@ test("wisible.request.mapper; given patient mock with age < 15 when call pipelin
     ageYear: 14,
     patientPhone: "0812223333",
     address: {
-      subDistrictCode: 1,
-      districtCode: 2,
-      provinceCode: 3,
+      subDistrict: "someSubDistrict",
+      district: "someSubDistrict",
+      province: "someSubDistrict",
       zipCode: 4,
     },
   }
@@ -44,9 +44,9 @@ test("wisible.request.mapper; given patient mock with isPregnant=true when call 
     ageYear: 16,
     patientPhone: "0812223333",
     address: {
-      subDistrictCode: 1,
-      districtCode: 2,
-      provinceCode: 3,
+      subDistrict: "someSubDistrict",
+      district: "someSubDistrict",
+      province: "someSubDistrict",
       zipCode: 4,
     },
     medicalInfo: {
@@ -68,9 +68,9 @@ test("wisible.request.mapper; given patient mock with isDiseaseUncontrolledDm=tr
     ageYear: 16,
     patientPhone: "0812223333",
     address: {
-      subDistrictCode: 1,
-      districtCode: 2,
-      provinceCode: 3,
+      subDistrict: "someSubDistrict",
+      district: "someSubDistrict",
+      province: "someSubDistrict",
       zipCode: 4,
     },
     medicalInfo: {
@@ -92,9 +92,9 @@ test("wisible.request.mapper; given patient mock with isDiseaseCirrhosis=true wh
     ageYear: 16,
     patientPhone: "0812223333",
     address: {
-      subDistrictCode: 1,
-      districtCode: 2,
-      provinceCode: 3,
+      subDistrict: "someSubDistrict",
+      district: "someSubDistrict",
+      province: "someSubDistrict",
       zipCode: 4,
     },
     medicalInfo: {
@@ -116,9 +116,9 @@ test("wisible.request.mapper given patient mock with weightKg > 90 when call pip
     ageYear: 20,
     patientPhone: "0812223333",
     address: {
-      subDistrictCode: 1,
-      districtCode: 2,
-      provinceCode: 3,
+      subDistrict: "someSubDistrict",
+      district: "someSubDistrict",
+      province: "someSubDistrict",
       zipCode: 4,
     },
   }
@@ -137,9 +137,9 @@ test("wisible.request.mapper given patient mock with age>=15, weight<=90 and all
     ageYear: 20,
     patientPhone: "0812223333",
     address: {
-      subDistrictCode: 1,
-      districtCode: 2,
-      provinceCode: 3,
+      subDistrict: "someSubDistrict",
+      district: "someSubDistrict",
+      province: "someSubDistrict",
       zipCode: 4,
     },
   }
