@@ -24,7 +24,16 @@ async function sendToPedApi(request: PedRequest): Promise<void> {
 
   await traceWrapperAsync(
     async () => {
-      await axios.post(PED_URL, request, { headers })
+      await axios.post(PED_URL, request, { headers }).then((res) => {
+        console.log(res.data)
+        if (res.status === 200) {
+          return Promise.resolve("success")
+        } else {
+          return Promise.resolve(
+            "error: " + res.data + " status is " + res.status
+          )
+        }
+      })
     },
     "external",
     "sendToPedApi",
