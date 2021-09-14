@@ -19,11 +19,14 @@ export function wisibleRequestFromPatient(
     age: optGet(patient.ageYear),
     phone: optGet(patient.patientPhone),
     address: addressText(patient),
-    subdistrict: optGet(patient.address?.subDistrict),
-    district: optGet(patient.address?.district),
-    province: optGet(patient.address?.province),
-    zipcode: optGet(patient.address?.zipCode?.toString()),
-    source: optGet(patient.sourceName ?? ""),
+    subdistrict: optGetOrElse<string, string>(patient.address?.subDistrict, ""),
+    district: optGetOrElse<string, string>(patient.address?.district, ""),
+    province: optGetOrElse<string, string>(patient.address?.province, ""),
+    zipcode: optGetOrElse<string, string>(
+      patient.address?.zipCode?.toString(),
+      ""
+    ),
+    source: optGetOrElse<string, string>(patient.sourceName, ""),
     bypass_screening: optGetOrElse<boolean, boolean>(
       patient.medicalInfo?.isBypassScreening,
       false
