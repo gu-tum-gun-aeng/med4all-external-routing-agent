@@ -4,6 +4,7 @@ import Dotenv from "dotenv"
 Dotenv.config()
 
 // import ColinkProcessor from "./processor/colinkProcessor"
+import PedProcessor from "./processor/pedProcessor"
 import { ParallelProcessConsumer } from "./processor/processor"
 import WisibleProcessor from "./processor/wisibleProcessor"
 import { logger } from "./util/logger"
@@ -20,8 +21,9 @@ const run = async () => {
 
   // const colink = new ColinkProcessor()
   const wisible = new WisibleProcessor()
+  const ped = new PedProcessor()
 
-  const processes = new ParallelProcessConsumer([wisible])
+  const processes = new ParallelProcessConsumer([wisible, ped])
 
   await processes.consume()
 

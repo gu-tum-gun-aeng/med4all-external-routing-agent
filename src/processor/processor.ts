@@ -18,10 +18,20 @@ export class ParallelProcessConsumer {
 
   parallelProcessMessage = async (message: string) => {
     try {
+      const patientData: Patient = JSON.parse(message)
+      let processors: SendToExternalProcessor[] = []
+
+      if (
+        patientData.medicalInfo?.isBedRequested ||
+        patientData.medicalInfo?.isOxygenRequested
+      ) {
+        processors = [processors[1]]
+      } else {
+        processors = [processors[0]]
+      }
+
       await Promise.all(
-        this.processors.map(async (processor) =>
-          processor.processMessage(message)
-        )
+        processors.map(async (processor) => processor.processMessage(message))
       )
     } catch (error) {
       console.log(error)

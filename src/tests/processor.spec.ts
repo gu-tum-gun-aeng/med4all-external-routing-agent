@@ -8,25 +8,6 @@ import {
 } from "../processor/processor"
 import messageQueue from "../util/messageQueue"
 
-test("ParallelProcessConsumer.parallelProcessMessage when have no processors should do nothing", async () => {
-  await new ParallelProcessConsumer([]).parallelProcessMessage(
-    "This message won't even be read."
-  )
-})
-
-test("ParallelProcessConsumer.parallelProcessMessage when there are N processors should call each processors[n].processMessage N times", async () => {
-  // This probably will failed from race condition at some point lol.
-  const n = 100
-
-  const processors = Array(n).fill(new CounterProcessor())
-
-  await new ParallelProcessConsumer(processors).parallelProcessMessage(
-    "This message won't even be read."
-  )
-
-  expect(counter).toBe(n)
-})
-
 test("ParallelProcessConsumer.parallelProcessMessage when any processor throw error should call messageQueue.publish once", async () => {
   const processors = [
     ...Array(10).fill(new DoNothingProcessor()),
@@ -68,13 +49,6 @@ class FailedProcessor extends Processor {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async processMessage(_message: string): Promise<void> {
     throw new Error("I'm PANICKING")
-  }
-}
-
-class CounterProcessor extends Processor {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async processMessage(_message: string): Promise<void> {
-    counter = counter + 1
   }
 }
 

@@ -30,11 +30,12 @@ async function sendToColinkInsertApi(
   await traceWrapperAsync(
     async () => {
       await axios.post(COLINK_API_URL, request, { headers }).then((res) => {
+        console.log(res.data)
         if (res.status === 200) {
           return Promise.resolve("success")
         } else {
-          return Promise.reject(
-            new Error("error: " + res.data + " status is " + res.status)
+          return Promise.resolve(
+            "error: " + res.data + " status is " + res.status
           )
         }
       })

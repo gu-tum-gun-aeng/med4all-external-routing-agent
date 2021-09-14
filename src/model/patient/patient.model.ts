@@ -66,6 +66,8 @@ export type MedicalInfo = {
   isSymptomLossOfTaste?: boolean
   isSymptomTiredness?: boolean
   isSymptomChestPain?: boolean
+  isSymptomPoorAppetite?: boolean
+  isSymptomGi?: boolean
   isDiseaseUncontrolledDm?: boolean
   isDiseaseCancer?: boolean
   isDiseaseCopd?: boolean
@@ -79,6 +81,7 @@ export type MedicalInfo = {
   isDiseaseHyperlipidemia?: boolean
   isDiseaseCirrhosis?: boolean
   isDiseaseTuberculosis?: boolean
+  isDiseaseEsrd?: boolean
   vaccinationRecords?: string[]
   firstVaccinatedWhen?: string
   secondVaccinatedWhen?: string
@@ -86,10 +89,8 @@ export type MedicalInfo = {
   firstSymptomWhen?: string
   isMedicineRequested?: boolean
   isBypassScreening?: boolean
-  isSymptomSevereCough?: boolean
-  isSymptomPoorAppetite?: boolean
-  isSymptomFatique?: boolean
-  isDiseaseESRD?: boolean
+  isBedRequested?: boolean
+  isOxygenRequested?: boolean
 }
 
 export type Address = {

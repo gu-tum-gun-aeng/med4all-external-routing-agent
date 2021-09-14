@@ -12,6 +12,7 @@ const config: {
   wisibleApiUrl: string
   wisibleApiKey: string
   wisibleCookie: string
+  pedUrl: string
 } = {
   appName: jsonConfig.get("app.name"),
   logLevel: jsonConfig.get("log.level"),
@@ -25,6 +26,7 @@ const config: {
   wisibleApiUrl: process.env.WISIBLE_API_URL || jsonConfig.get("wisible.url"),
   wisibleApiKey: process.env.WISIBLE_API_KEY || jsonConfig.get("wisible.token"),
   wisibleCookie: process.env.WISIBLE_COOKIE || jsonConfig.get("wisible.cookie"),
+  pedUrl: process.env.PED_URL || jsonConfig.get("ped.url"),
 }
 
 export default config
