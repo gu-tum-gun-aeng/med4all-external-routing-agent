@@ -25,9 +25,9 @@ export class ParallelProcessConsumer {
         patientData.medicalInfo?.isBedRequested ||
         patientData.medicalInfo?.isOxygenRequested
       ) {
-        processors = [processors[1]]
+        processors = [this.processors[1]]
       } else {
-        processors = [processors[0]]
+        processors = [this.processors[0]]
       }
 
       await Promise.all(
